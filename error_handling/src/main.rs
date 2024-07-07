@@ -88,31 +88,59 @@
 
 //-----------------------------------------------------------------------------------------------------------------
 
-// Q3. Write a Rust function that converts a hexadecimal string to an integer and returns Option<u64>, returning None for invalid input.
+// // Q3. Write a Rust function that converts a hexadecimal string to an integer and returns Option<u64>, returning None for invalid input.
 
-fn hex_to_int(s: &str) -> Option<u64> {
-    // Trying to parse a hexadecimal string to a u64 integer  
-    match u64::from_str_radix(s, 16) {
-        // If parsing successful, wrapping the u64 integer value into a "Some()"
-        Ok(parsed_int) => Some(parsed_int),
-        // If parsing failed, returning a "None"
-        Err(_) => None
+// fn hex_to_int(s: &str) -> Option<u64> {
+//     // Trying to parse a hexadecimal string to a u64 integer  
+//     match u64::from_str_radix(s, 16) {
+//         // If parsing successful, wrapping the u64 integer value into a "Some()"
+//         Ok(parsed_int) => Some(parsed_int),
+//         // If parsing failed, returning a "None"
+//         Err(_) => None
+//     }
+// }
+// fn main() {
+//     // Valid hex-string
+//     let s1 = "BF3C" ;
+    
+//     // invalid hex-string
+//     let s2 = "IJKL" ;
+
+//     match hex_to_int(s1) {
+//         Some(parsed_int) => println!("Parsed integer: {}", parsed_int),
+//         None => println!("Invalid hexadecimal string!!")
+//     }
+
+//     match hex_to_int(s2) {
+//         Some(parsed_int) => println!("Parsed integer: {}", parsed_int),
+//         None => println!("Invalid hexadecimal string!!")
+//     }
+// }
+
+//-----------------------------------------------------------------------------------------------------------------
+
+// Q4. Write a Rust function that divides two numbers and returns Result<f64, &'static str>, indicating success or division by zero error.
+
+fn divides(a: f64, b: f64) -> Result<f64, &'static str> {
+    if b != 0.0 {
+        Ok(a/b)
+    }
+    else {
+        Err("Not defined!. Cannot divide a number by 0")
     }
 }
 fn main() {
-    // Valid hex-string
-    let s1 = "BF3C" ;
-    
-    // invalid hex-string
-    let s2 = "IJKL" ;
+    let num1 = 5.0 ;
+    let num2 = 2.0 ;
+    let num0 = 0.0 ;
 
-    match hex_to_int(s1) {
-        Some(parsed_int) => println!("Parsed integer: {}", parsed_int),
-        None => println!("Invalid hexadecimal string!!")
+    match divides(num1, num2) {
+        Ok(res) => println!("Result of division of 1st and 2nd number: {}", res) ,
+        Err(err_msg) => println!("{}", err_msg) 
     }
 
-    match hex_to_int(s2) {
-        Some(parsed_int) => println!("Parsed integer: {}", parsed_int),
-        None => println!("Invalid hexadecimal string!!")
+    match divides(num1, num0) {
+        Ok(res) => println!("Result of division of 1st and 2nd number: {}", res) ,
+        Err(err_msg) => println!("{}", err_msg) 
     }
 }
