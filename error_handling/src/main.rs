@@ -180,61 +180,102 @@
 
 //-----------------------------------------------------------------------------------------------------------------
 
-// Q6. Write a Rust program that accepts user input for a date, parses it, and prints it in a different format, handling parsing errors.
-use std::io ;
+// // Q6. Write a Rust program that accepts user input for a date, parses it, and prints it in a different format, handling parsing errors.
+// use std::io ;
 
-// Our funtion will either return an Ok((u32,u32,i32)) or an Err(&str)
-fn parsed_dt(dt: &str) -> Result<(u32,u32,i32), &str> {
-    // Breaking the date into 3 parts and pushing each part into a vector
-    let date: Vec<&str> = dt.split('-').collect() ;
+// // Our funtion will either return an Ok((u32,u32,i32)) or an Err(&str)
+// fn parsed_dt(dt: &str) -> Result<(u32,u32,i32), &str> {
+//     // Breaking the date into 3 parts and pushing each part into a vector
+//     let date: Vec<&str> = dt.split('-').collect() ;
 
-    // Checking whether our vector has all 3 parts i.e., day, month and year or not
-    if date.len() != 3 {
-        return Err("Invalid date !! Please enter date in format [YYYY-MM-DD]");
+//     // Checking whether our vector has all 3 parts i.e., day, month and year or not
+//     if date.len() != 3 {
+//         return Err("Invalid date !! Please enter date in format [YYYY-MM-DD]");
+//     }
+
+//     // Creating "year" using match and if user does not enter year field as numeric, we will 
+//     // return an error.
+//     let year = match date[0].parse::<i32>() {
+//         Ok(num) => num ,
+//         Err(_) => return Err("Year should be entered in numerics only !!")
+//     } ;
+
+//     // Creating "month" using match and if user does not enter month field as numeric, we will 
+//     // return an error.
+//     let month = match date[1].parse::<u32>() {
+//         Ok(num) => num ,
+//         Err(_) => return Err("Month should be entered in numerics only !!")
+//     } ;
+
+//     // Creating "day" using match and if user does not enter day field as numeric, we will 
+//     // return an error.
+//     let day = match date[2].parse::<u32>() {
+//         Ok(num) => num ,
+//         Err(_) => return Err("Day should be entered in numerics only !!")
+//     } ;
+
+//     // Checking whether the user entered month between 1 and 12 and day between 1 and 31.
+//     if month > 12  || day > 31 {
+//         return Err("Invalid date!! Please enter 'day' between 1 and 31 and 'month' between 1 and 12.") ;
+//     }
+
+//     Ok((day, month, year))
+
+// }
+// fn main() {
+//     println!("Enter a date in format [YYYY-MM-DD]:") ;
+//     let mut dt = String::new() ;
+
+//     io::stdin()
+//     .read_line(&mut dt)
+//     .expect("Failed in reading input!!") ;
+
+//     // Removing leading or trailing spaces from input
+//     let trimmed_dt = dt.trim() ;
+
+//     match parsed_dt(trimmed_dt) {
+//         Ok((day, month, year)) => println!("Parsed date after conversion to a different date format: {:02}-{:02}-{}", day, month, year) ,
+//         Err(err_msg) => println!("{}", err_msg)
+//     }    
+// }
+
+//-----------------------------------------------------------------------------------------------------------------
+
+// Q7. Write a Rust function that performs complex calculations, handling errors related to invalid inputs or computational errors.
+
+fn complex_function(x: f64, y: f64) -> Result<f64, String> {
+    // Checking if either of the field is a NaN or not
+    if x.is_nan() || y.is_nan() {
+        return Err(String::from("Invalid input: NaN is not allowed"));
     }
 
-    // Creating "year" using match and if user does not enter year field as numeric, we will 
-    // return an error.
-    let year = match date[0].parse::<i32>() {
-        Ok(num) => num ,
-        Err(_) => return Err("Year should be entered in numerics only !!")
-    } ;
+    // Performing the complex function
+    let res = x.powf(y) ;
 
-    // Creating "month" using match and if user does not enter month field as numeric, we will 
-    // return an error.
-    let month = match date[1].parse::<u32>() {
-        Ok(num) => num ,
-        Err(_) => return Err("Month should be entered in numerics only !!")
-    } ;
-
-    // Creating "day" using match and if user does not enter day field as numeric, we will 
-    // return an error.
-    let day = match date[2].parse::<u32>() {
-        Ok(num) => num ,
-        Err(_) => return Err("Day should be entered in numerics only !!")
-    } ;
-
-    // Checking whether the user entered month between 1 and 12 and day between 1 and 31.
-    if month > 12  || day > 31 {
-        return Err("Invalid date!! Please enter 'day' between 1 and 31 and 'month' between 1 and 12.") ;
+    // Checking whether the "res" is infinite or not
+    if res.is_infinite() {
+        return Err(String::from("Computational error: Result is infinite"));
     }
 
-    Ok((day, month, year))
-
+    // If there are no errors, returning "res"
+    Ok(res) 
 }
 fn main() {
-    println!("Enter a date in format [YYYY-MM-DD]:") ;
-    let mut dt = String::new() ;
+    // Testing the complex function for valid inputs
+    match complex_function(2.0, 3.0) {
+        Ok(result) => println!("Result: {}", result), 
+        Err(err) => eprintln!("Error: {}", err)       // "eprintln!" macro prints in the "Standard Error" Column in the terminal
+    }
 
-    io::stdin()
-    .read_line(&mut dt)
-    .expect("Failed in reading input!!") ;
+    // Testing for complex function for one valid input and one NaN(Not a number) 
+    match complex_function(1.0, f64::NAN) {
+        Ok(result) => println!("Result: {}", result), 
+        Err(err) => eprintln!("Error: {}", err)
+    }
 
-    // Removing leading or trailing spaces from input
-    let trimmed_dt = dt.trim() ;
-
-    match parsed_dt(trimmed_dt) {
-        Ok((day, month, year)) => println!("Parsed date after conversion to a different date format: {:02}-{:02}-{}", day, month, year) ,
-        Err(err_msg) => println!("{}", err_msg)
-    }    
+    // Testing for a case of infinite result i.e., Out of bounds for f64 range
+    match complex_function(100.0, 10000.0) {
+        Ok(result) => println!("Result: {}", result), 
+        Err(err) => eprintln!("Error: {}", err)
+    }
 }
