@@ -58,30 +58,61 @@
 
 //-----------------------------------------------------------------------------------------------------------------
 
-//Q2. Write a Rust function that takes a string and returns Option<usize> representing the string length, returning None for empty strings.
+// // Q2. Write a Rust function that takes a string and returns Option<usize> representing the string length, returning None for empty strings.
 
-fn string_len(s: String) -> Option<usize> {
-    // fn "is_empty()" will check whether the string is empty or not
-    if s.is_empty(){
-        None
-    }
-    else {
-        Some(s.len())
+// fn string_len(s: String) -> Option<usize> {
+//     // fn "is_empty()" will check whether the string is empty or not
+//     if s.is_empty(){
+//         None
+//     }
+//     else {
+//         Some(s.len())
+//     }
+// }
+
+// fn main() {
+//     let s1 = "My name is Vishesh".to_string() ;
+//     let s2 = "".to_string() ;
+    
+//     // Checking for a non-empty string
+//     match string_len(s1) {
+//         Some(len) => println!("Length of string: {}", len) ,
+//         None => println!("String is empty!!") 
+//     }
+//     // Checking for an empty string
+//     match string_len(s2) {
+//         Some(len) => println!("Length of string: {}", len) ,
+//         None => println!("String is empty!!")
+//     }
+// }
+
+//-----------------------------------------------------------------------------------------------------------------
+
+// Q3. Write a Rust function that converts a hexadecimal string to an integer and returns Option<u64>, returning None for invalid input.
+
+fn hex_to_int(s: &str) -> Option<u64> {
+    // Trying to parse a hexadecimal string to a u64 integer  
+    match u64::from_str_radix(s, 16) {
+        // If parsing successful, wrapping the u64 integer value into a "Some()"
+        Ok(parsed_int) => Some(parsed_int),
+        // If parsing failed, returning a "None"
+        Err(_) => None
     }
 }
-
 fn main() {
-    let s1 = "My name is Vishesh".to_string() ;
-    let s2 = "".to_string() ;
+    // Valid hex-string
+    let s1 = "BF3C" ;
     
-    // Checking for a non-empty string
-    match string_len(s1) {
-        Some(len) => println!("Length of string: {}", len) ,
-        None => println!("String is empty!!") 
+    // invalid hex-string
+    let s2 = "IJKL" ;
+
+    match hex_to_int(s1) {
+        Some(parsed_int) => println!("Parsed integer: {}", parsed_int),
+        None => println!("Invalid hexadecimal string!!")
     }
-    // Checking for an empty string
-    match string_len(s2) {
-        Some(len) => println!("Length of string: {}", len) ,
-        None => println!("String is empty!!")
+
+    match hex_to_int(s2) {
+        Some(parsed_int) => println!("Parsed integer: {}", parsed_int),
+        None => println!("Invalid hexadecimal string!!")
     }
 }
