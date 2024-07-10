@@ -67,4 +67,25 @@ fn main() {
         Some(_) => println!("Updated map after removing key: {} is {:?}", key_to_remove, map) ,
         None => println!("Key {} is not present in our map", key_to_remove) 
     } ;
+
+    let mut map2 = HashMap::<String, i32>::new() ;
+    map2.insert(String::from("Flora"), 23) ;
+    map2.insert(String::from("Gary"), 25) ;
+    map2.insert(String::from("Han"), 29) ;
+    map2.insert(String::from("Irodov"), 24) ;
+
+    println!("Map2: {:?}", map2) ;
+
+    // Merging the two maps: map and map2
+
+    let mut merged_map = HashMap::new() ;
+    
+    for (k, v) in map.iter(){
+        merged_map.insert(k, *v) ;
+    }
+
+    for(k, v) in map2.iter(){
+        merged_map.insert(k, *v) ;
+    }
+    println!("Merged map: {:?}", merged_map) ;
 }
