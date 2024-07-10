@@ -92,35 +92,60 @@ use std::collections::HashMap ;
 
 //--------------------------------------------------------------------------------------------------------
 
-// Q2. Program to count the frequency of characters in a string and store the result in a HashMap.
-use std::io ;
-fn main(){
-    println!("Please enter your String: ") ;
+// // Q2. Program to count the frequency of characters in a string and store the result in a HashMap.
+// use std::io ;
+// fn main(){
+//     println!("Please enter your String: ") ;
 
-    let mut str = String::new() ;
+//     let mut str = String::new() ;
 
-    io::stdin()
-    .read_line(&mut str)
-    .expect("Failed in reading input") ;
+//     io::stdin()
+//     .read_line(&mut str)
+//     .expect("Failed in reading input") ;
 
-    let str = str.trim() ;
+//     let str = str.trim() ;
 
-    // Creating an empty Map
-    let mut map = HashMap::new();
+//     // Creating an empty Map
+//     let mut map = HashMap::new();
 
-    for ch in str.chars(){
-        // This will check whether the given character is present in our map or not
-        // If it is present, increment its frequency count
-        // If it is not present, insert it into the HashMap with a frequency count of 0
-        let count = map.entry(ch).or_insert(0) ;
+//     for ch in str.chars(){
+//         // This will check whether the given character is present in our map or not
+//         // If it is present, increment its frequency count
+//         // If it is not present, insert it into the HashMap with a frequency count of 0
+//         let count = map.entry(ch).or_insert(0) ;
         
-        // If the character is not present, count will be incremented to 1.
-        // If the character is present, count will be updated accordingly while iterating through the characters
-        *count += 1 ;
+//         // If the character is not present, count will be incremented to 1.
+//         // If the character is present, count will be updated accordingly while iterating through the characters
+//         *count += 1 ;
+//     }
+
+//     println!("Frequencies of characters entered by user: ") ;
+//     for (k, v) in map.iter(){
+//         println!("Value: {} | Frequency: {}", k, v) ;
+//     }
+// }
+
+//--------------------------------------------------------------------------------------------------------
+
+// Q3. Program to convert a vector of tuples into a HashMap where the first element of each 
+// tuple is the key and the second element is the value.
+
+fn main() {
+    let vec_of_tup = vec![
+        ("Apple", 1),
+        ("Banana", 2),
+        ("Guava", 3),
+        ("Papaya", 4),
+        ("Kiwi", 5)
+    ] ;
+
+    let mut map = HashMap::new() ;
+
+    for (k, v) in vec_of_tup{
+        map.insert(k, v) ;
     }
 
-    println!("Frequencies of characters entered by user: ") ;
     for (k, v) in map.iter(){
-        println!("Value: {} | Frequency: {}", k, v) ;
+        println!("Key: {} | Value: {}", k, v) ;
     }
 }
