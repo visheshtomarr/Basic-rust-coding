@@ -56,65 +56,100 @@
 
 //-------------------------------------------------------------------------------------------------------
 
-// Q2. Write a program to compare two dates entered by user. Make a structure named Date to store the elements day, 
-// month and year to store the dates. If the dates are equal, display "Dates are equal" otherwise display "Dates are not equal".
+// // Q2. Write a program to compare two dates entered by user. Make a structure named Date to store the elements day, 
+// // month and year to store the dates. If the dates are equal, display "Dates are equal" otherwise display "Dates are not equal".
+// #![allow(unused_variables)]
+// #![allow(dead_code)]
+// #[derive(Debug)]
+// #[derive(PartialEq)]
+// struct Date{
+//     day: u32,
+//     month: u32,
+//     year: u32
+// }
+
+// use std::io ;
+// fn main(){
+//         println!("Enter first Date in DDMMYYYY format: ") ;
+//         let mut date1 = String::new() ;
+
+//         io::stdin()
+//         .read_line(&mut date1)
+//         .expect("Failed to read input") ;
+
+//         let date1: String = date1.trim().parse().expect("Failed in parsing") ;
+
+//         println!("Enter second Date in DDMMYYYY format: ") ;
+//         let mut date2 = String::new() ;
+
+//         io::stdin()
+//         .read_line(&mut date2)
+//         .expect("Failed to read input") ;
+
+//         let date2: String = date2.trim().parse().expect("Failed in parsing") ;
+
+//         let day1: u32 = date1[0..2].parse().unwrap() ; 
+//         let month1: u32 = date1[2..4].parse().unwrap() ;
+//         let year1: u32 = date1[4..8].parse().unwrap() ;
+
+//         let day2: u32 = date2[0..2].parse().unwrap() ; 
+//         let month2: u32 = date2[2..4].parse().unwrap() ;
+//         let year2: u32 = date2[4..8].parse().unwrap() ;
+
+//         let dt1 = Date{
+//             day: day1,
+//             month: month1,
+//             year: year1
+//         } ;
+
+//         let dt2 = Date{
+//             day: day2,
+//             month: month2,
+//             year: year2
+//         } ;
+
+//         println!("{:?}", dt1) ;
+//         println!("{:?}", dt2) ;
+
+//         if dt1 == dt2 {
+//             println!("Dates are equal") ;
+//         }
+//         else{
+//             println!("Dates are not equal") ;
+//         }
+//     }
+
+//---------------------------------------------------------------------------------------------
+
+// Q3. Create a structure named Date having day, month and year as its elements. 
+// Store the current date in the structure. Now add 45 days to the current date and display the final date.
+
 #![allow(unused_variables)]
 #![allow(dead_code)]
 #[derive(Debug)]
-#[derive(PartialEq)]
+
 struct Date{
     day: u32,
     month: u32,
     year: u32
 }
 
-use std::io ;
 fn main(){
-        println!("Enter first Date in DDMMYYYY format: ") ;
-        let mut date1 = String::new() ;
+    let mut dt = Date{
+        day: 12,
+        month: 7,
+        year: 2024
+    } ;
 
-        io::stdin()
-        .read_line(&mut date1)
-        .expect("Failed to read input") ;
+    println!("Current date : {:?}", dt) ;
 
-        let date1: String = date1.trim().parse().expect("Failed in parsing") ;
+    update_date(&mut dt) ;
 
-        println!("Enter second Date in DDMMYYYY format: ") ;
-        let mut date2 = String::new() ;
+    println!("Date after adding 45 days in the current date: {:?}", dt) ;
 
-        io::stdin()
-        .read_line(&mut date2)
-        .expect("Failed to read input") ;
+}
 
-        let date2: String = date2.trim().parse().expect("Failed in parsing") ;
-
-        let day1: u32 = date1[0..2].parse().unwrap() ; 
-        let month1: u32 = date1[2..4].parse().unwrap() ;
-        let year1: u32 = date1[4..8].parse().unwrap() ;
-
-        let day2: u32 = date2[0..2].parse().unwrap() ; 
-        let month2: u32 = date2[2..4].parse().unwrap() ;
-        let year2: u32 = date2[4..8].parse().unwrap() ;
-
-        let dt1 = Date{
-            day: day1,
-            month: month1,
-            year: year1
-        } ;
-
-        let dt2 = Date{
-            day: day2,
-            month: month2,
-            year: year2
-        } ;
-
-        println!("{:?}", dt1) ;
-        println!("{:?}", dt2) ;
-
-        if dt1 == dt2 {
-            println!("Dates are equal") ;
-        }
-        else{
-            println!("Dates are not equal") ;
-        }
-    }
+fn update_date(date: &mut Date){
+        date.day = 26 ;
+        date.month = 8 ;
+}
