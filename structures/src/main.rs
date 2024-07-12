@@ -196,51 +196,119 @@
 
 //---------------------------------------------------------------------------------------------
 
-// Q5. Creating a trait to find whether 2 different flights can travel upto the given distance or not.
-#![allow(dead_code)]
-#[derive(Debug)]
-struct Vistara {
-    model: String,
-    range: u32
-}
+// // Q5. Creating a trait to find whether 2 different flights can travel upto the given distance or not.
+// #![allow(dead_code)]
+// #[derive(Debug)]
+// struct Vistara {
+//     model: String,
+//     range: u32
+// }
 
-#[derive(Debug)]
-struct AirIndia {
-    model: String,
-    range: u32
-}
+// #[derive(Debug)]
+// struct AirIndia {
+//     model: String,
+//     range: u32
+// }
 
-// This is how we define a trait
-trait Flight{
-    fn is_valid(&self, distance: u32) -> bool ;
-}
+// // This is how we define a trait
+// trait Flight{
+//     fn is_valid(&self, distance: u32) -> bool ;
+// }
 
-// Implementing trait Flight for struct Vistara
-impl Flight for Vistara {
-    fn is_valid(&self, distance: u32) -> bool {
-        self.range + 200 > distance
-    }
-}
+// // Implementing trait Flight for struct Vistara
+// impl Flight for Vistara {
+//     fn is_valid(&self, distance: u32) -> bool {
+//         self.range + 200 > distance
+//     }
+// }
 
-// Implementing trait Flight for struct AirIndia
-impl Flight for AirIndia {
-    fn is_valid(&self, distance: u32) -> bool {
-        self.range + 300 > distance
-    }
-}
+// // Implementing trait Flight for struct AirIndia
+// impl Flight for AirIndia {
+//     fn is_valid(&self, distance: u32) -> bool {
+//         self.range + 300 > distance
+//     }
+// }
 
-fn main(){
-    let vistara = Vistara {
-        model: String::from("A437") ,
-        range: 1500
-    } ;
+// fn main(){
+//     let vistara = Vistara {
+//         model: String::from("A437") ,
+//         range: 1500
+//     } ;
     
-    let airindia = AirIndia{
-        model: String::from("T289") ,
-        range: 2000
-    } ;
+//     let airindia = AirIndia{
+//         model: String::from("T289") ,
+//         range: 2000
+//     } ;
 
-    println!("Flight vistara is valid for 1000km: {}", vistara.is_valid(1000)) ;
-    println!("Flight airindia is valid for 2500km: {}", airindia.is_valid(2500)) ;
+//     println!("Flight vistara is valid for 1000km: {}", vistara.is_valid(1000)) ;
+//     println!("Flight airindia is valid for 2500km: {}", airindia.is_valid(2500)) ;
 
+// }
+
+//---------------------------------------------------------------------------------------------
+
+// Q6. Use pattern matching to find that whether a point lies on X-Axis, Y-Axis or on which quadrant.
+
+#![allow(dead_code)]
+#![allow(unused_variables)]
+#[derive(Debug)]
+
+struct Point {
+    x: i32, 
+    y: i32
+} 
+
+impl Point {
+    fn position(&self, x: i32, y: i32) {
+        let p = Point{x, y} ;
+        match p {
+            Point{x: 0, y: 0} => println!("Postion of point is on origin"),
+            Point{x: 0, y} => println!("Position of point is on Y-axis"),
+            Point{x, y: 0} => println!("Position of point is on X-axis"),
+            Point{x, y} => if x > 0 && y > 0 {
+                println!("Position of point is in 1st Quadrant")
+            }
+            else if x < 0 && y > 0 {
+                println!("Position of point is in 2nd Quadrant")
+            }
+            else if x < 0 && y < 0 {
+                println!("Position of point is in 3rd Quadrant")
+            }
+            else if x > 0 && y < 0{
+                println!("Position of point is in 4th Quadrant")
+            }
+        }
+    }
+}
+
+fn main() {
+    let p1 = Point{x: 0, y: 0} ;
+    let p2 = Point{x: 5, y: 0} ;
+    let p3 = Point{x: 0, y: 3} ;
+    let p4 = Point{x: 1, y: 1} ;
+    let p5 = Point{x: -3, y: 2} ;
+    let p6 = Point{x: -4, y: -6} ;
+    let p7 = Point{x: 2, y: -5} ;
+
+    println!("p1: {:?}", p1) ;
+    println!("{:?}", p1.position(p1.x, p1.y));
+    
+    println!("p2: {:?}", p2) ;
+    println!("{:?}", p2.position(p2.x, p2.y));
+
+    println!("p3: {:?}", p3) ;
+    println!("{:?}", p3.position(p3.x, p3.y));
+
+    println!("p4: {:?}", p4) ;
+    println!("{:?}", p4.position(p4.x, p4.y));
+
+    println!("p5: {:?}", p5) ;
+    println!("{:?}", p5.position(p5.x, p5.y));
+
+    println!("p6: {:?}", p6) ;
+    println!("{:?}", p6.position(p6.x, p6.y));
+
+    println!("p7: {:?}", p7) ;
+    println!("{:?}", p7.position(p7.x, p7.y));
+    
 }
