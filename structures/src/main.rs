@@ -121,35 +121,75 @@
 
 //---------------------------------------------------------------------------------------------
 
-// Q3. Create a structure named Date having day, month and year as its elements. 
-// Store the current date in the structure. Now add 45 days to the current date and display the final date.
+// // Q3. Create a structure named Date having day, month and year as its elements. 
+// // Store the current date in the structure. Now add 45 days to the current date and display the final date.
 
-#![allow(unused_variables)]
+// #![allow(unused_variables)]
+// #![allow(dead_code)]
+// #[derive(Debug)]
+
+// struct Date{
+//     day: u32,
+//     month: u32,
+//     year: u32
+// }
+
+// fn main(){
+//     let mut dt = Date{
+//         day: 12,
+//         month: 7,
+//         year: 2024
+//     } ;
+
+//     println!("Current date : {:?}", dt) ;
+
+//     update_date(&mut dt) ;
+
+//     println!("Date after adding 45 days in the current date: {:?}", dt) ;
+
+// }
+
+// fn update_date(date: &mut Date){
+//         date.day = 26 ;
+//         date.month = 8 ;
+// }
+
+//---------------------------------------------------------------------------------------------
+
+// Q4. Creating associated functions for a Student struct which will Lowercase the Name of the student
+// and the other function will tell if the student passed or not according to his/her marks.
+
 #![allow(dead_code)]
 #[derive(Debug)]
 
-struct Date{
-    day: u32,
-    month: u32,
-    year: u32
+struct Student{
+    name: String,
+    rollno: u32,
+    marks: f32
 }
 
-fn main(){
-    let mut dt = Date{
-        day: 12,
-        month: 7,
-        year: 2024
+impl Student{
+    fn is_passed(&self) -> bool {
+        self.marks > 6.0
+    }
+    
+    fn to_lowercase(&self) -> Self { 
+        Self {
+            name: self.name.to_lowercase(),
+            ..*self
+        }
+    }
+}
+
+fn main() {
+    let st1 = Student{
+        name: String::from("ABCD"),
+        rollno: 44,
+        marks: 8.6
     } ;
 
-    println!("Current date : {:?}", dt) ;
+    println!("st1 is {:?}", st1) ;
+    println!("st1 after function call is {:?}", st1.to_lowercase()) ;
 
-    update_date(&mut dt) ;
-
-    println!("Date after adding 45 days in the current date: {:?}", dt) ;
-
-}
-
-fn update_date(date: &mut Date){
-        date.day = 26 ;
-        date.month = 8 ;
+    println!("st1 is passed: {}", st1.is_passed()) ;
 }
