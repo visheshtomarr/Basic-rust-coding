@@ -156,40 +156,91 @@
 
 //---------------------------------------------------------------------------------------------
 
-// Q4. Creating associated functions for a Student struct which will Lowercase the Name of the student
-// and the other function will tell if the student passed or not according to his/her marks.
+// // Q4. Creating associated functions for a Student struct which will Lowercase the Name of the student
+// // and the other function will tell if the student passed or not according to his/her marks.
 
+// #![allow(dead_code)]
+// #[derive(Debug)]
+
+// struct Student{
+//     name: String,
+//     rollno: u32,
+//     marks: f32
+// }
+
+// impl Student{
+//     fn is_passed(&self) -> bool {
+//         self.marks > 6.0
+//     }
+    
+//     fn to_lowercase(&self) -> Self { 
+//         Self {
+//             name: self.name.to_lowercase(),
+//             ..*self
+//         }
+//     }
+// }
+
+// fn main() {
+//     let st1 = Student{
+//         name: String::from("ABCD"),
+//         rollno: 44,
+//         marks: 8.6
+//     } ;
+
+//     println!("st1 is {:?}", st1) ;
+//     println!("st1 after function call is {:?}", st1.to_lowercase()) ;
+
+//     println!("st1 is passed: {}", st1.is_passed()) ;
+// }
+
+//---------------------------------------------------------------------------------------------
+
+// Q5. Creating a trait to find whether 2 different flights can travel upto the given distance or not.
 #![allow(dead_code)]
 #[derive(Debug)]
-
-struct Student{
-    name: String,
-    rollno: u32,
-    marks: f32
+struct Vistara {
+    model: String,
+    range: u32
 }
 
-impl Student{
-    fn is_passed(&self) -> bool {
-        self.marks > 6.0
+#[derive(Debug)]
+struct AirIndia {
+    model: String,
+    range: u32
+}
+
+// This is how we define a trait
+trait Flight{
+    fn is_valid(&self, distance: u32) -> bool ;
+}
+
+// Implementing trait Flight for struct Vistara
+impl Flight for Vistara {
+    fn is_valid(&self, distance: u32) -> bool {
+        self.range + 200 > distance
     }
+}
+
+// Implementing trait Flight for struct AirIndia
+impl Flight for AirIndia {
+    fn is_valid(&self, distance: u32) -> bool {
+        self.range + 300 > distance
+    }
+}
+
+fn main(){
+    let vistara = Vistara {
+        model: String::from("A437") ,
+        range: 1500
+    } ;
     
-    fn to_lowercase(&self) -> Self { 
-        Self {
-            name: self.name.to_lowercase(),
-            ..*self
-        }
-    }
-}
-
-fn main() {
-    let st1 = Student{
-        name: String::from("ABCD"),
-        rollno: 44,
-        marks: 8.6
+    let airindia = AirIndia{
+        model: String::from("T289") ,
+        range: 2000
     } ;
 
-    println!("st1 is {:?}", st1) ;
-    println!("st1 after function call is {:?}", st1.to_lowercase()) ;
+    println!("Flight vistara is valid for 1000km: {}", vistara.is_valid(1000)) ;
+    println!("Flight airindia is valid for 2500km: {}", airindia.is_valid(2500)) ;
 
-    println!("st1 is passed: {}", st1.is_passed()) ;
 }
