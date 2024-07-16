@@ -100,17 +100,39 @@
 
 //------------------------------------------------------------------------------------------
 
-// Q3. Write a Rust program that creates an array of strings with size 6 and initializes it with days of the week.
-// Remove the last 2 elements from the array and slice it to get a sub-array containing the first 3 days.
-// Print the resulting sub-array.
+// // Q3. Write a Rust program that creates an array of strings with size 6 and initializes it with days of the week.
+// // Remove the last 2 elements from the array and slice it to get a sub-array containing the first 3 days.
+// // Print the resulting sub-array.
 
-fn main() {
-    let mut week_days = vec!["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] ;
-    let n = week_days.len() ;
-    println!("Weekdays: {:?}", week_days) ;
-    week_days.drain(n-2..) ;
-    println!("Removing last 2 days from weekdays: {:?}", week_days) ;
+// fn main() {
+//     let mut week_days = vec!["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] ;
+//     let n = week_days.len() ;
+//     println!("Weekdays: {:?}", week_days) ;
+//     week_days.drain(n-2..) ;
+//     println!("Removing last 2 days from weekdays: {:?}", week_days) ;
 
-    let first_three_days = &week_days[0..3] ;
-    println!("First 3 days of week: {:?}", first_three_days) ;
+//     let first_three_days = &week_days[0..3] ;
+//     println!("First 3 days of week: {:?}", first_three_days) ;
+// }
+
+//------------------------------------------------------------------------------------------
+
+// Q4. Write a Rust program that creates an array of random integers of size 12.
+// Sort the array in descending order and slice it to get a sub-array containing the top 4 elements. Print the sub-array.
+use rand::Rng ;
+fn main () {
+    let mut arr: [i32; 12] = [0; 12] ;
+    let mut rng = rand::thread_rng() ;
+
+    for i in 0..12 {
+        arr[i] = rng.gen_range(1..21) ;
+    }
+
+    arr.sort() ;
+    arr.reverse() ;
+    let l = arr.len() ;
+    println!("Descending order array: {:?}", arr) ;
+    let top_four_elements = &arr[0..l-8] ;
+
+    println!("Top 4 elements: {:?}", top_four_elements) ;
 }
