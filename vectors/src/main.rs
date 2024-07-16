@@ -117,22 +117,37 @@
 
 //------------------------------------------------------------------------------------------
 
-// Q4. Write a Rust program that creates an array of random integers of size 12.
-// Sort the array in descending order and slice it to get a sub-array containing the top 4 elements. Print the sub-array.
-use rand::Rng ;
-fn main () {
-    let mut arr: [i32; 12] = [0; 12] ;
-    let mut rng = rand::thread_rng() ;
+// // Q4. Write a Rust program that creates an array of random integers of size 12.
+// // Sort the array in descending order and slice it to get a sub-array containing the top 4 elements. Print the sub-array.
+// use rand::Rng ;
+// fn main () {
+//     let mut arr: [i32; 12] = [0; 12] ;
+//     let mut rng = rand::thread_rng() ;
 
-    for i in 0..12 {
-        arr[i] = rng.gen_range(1..21) ;
-    }
+//     for i in 0..12 {
+//         arr[i] = rng.gen_range(1..21) ;
+//     }
 
-    arr.sort() ;
-    arr.reverse() ;
-    let l = arr.len() ;
-    println!("Descending order array: {:?}", arr) ;
-    let top_four_elements = &arr[0..l-8] ;
+//     arr.sort() ;
+//     arr.reverse() ;
+//     let l = arr.len() ;
+//     println!("Descending order array: {:?}", arr) ;
+//     let top_four_elements = &arr[0..l-8] ;
 
-    println!("Top 4 elements: {:?}", top_four_elements) ;
+//     println!("Top 4 elements: {:?}", top_four_elements) ;
+// }
+
+//------------------------------------------------------------------------------------------
+
+// Q5. Write a Rust program that creates an array of integers of size 9. Map each element of the array to its cube.
+// Slice the resulting array to get a sub-array containing the elements from index 1 to index 6. Print the sub-array.
+
+fn main() {
+    let arr3: [i32; 9] = [1, 2, 3, 4, 5, 6, 7, 8, 9] ;
+    println!("Third array: {:?}", arr3) ;
+
+    let cube_vec: Vec<i32> = arr3.iter().map(|x| x * x * x).collect() ;
+
+    let slice_of_cube_vec = &cube_vec[1..7] ;
+    println!("Slice of cube of elements: {:?}", slice_of_cube_vec) ; 
 }
