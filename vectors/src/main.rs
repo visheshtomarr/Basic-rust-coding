@@ -86,14 +86,31 @@
 
 //------------------------------------------------------------------------------------------
 
-// Q2. Write a Rust program that creates a vector of floating-point numbers. Map each element of the vector to its square root.
-// Slice the resulting vector to get a sub-vector containing the elements from index 2 to index 6. Print the sub-vector.
+// // Q2. Write a Rust program that creates a vector of floating-point numbers. Map each element of the vector to its square root.
+// // Slice the resulting vector to get a sub-vector containing the elements from index 2 to index 6. Print the sub-vector.
     
-    fn main () {
-        let v: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0] ;
-        println!("Second vector: {:?}", v) ;
+// fn main () {
+//     let v: Vec<f32> = vec![1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0] ;
+//     println!("Second vector: {:?}", v) ;
         
-        let vec_with_sqrt: Vec<f32> = v.into_iter().map(|x| x.sqrt()).collect() ;
-        let sqrt_vec = &vec_with_sqrt[2..7] ;
-        println!("Square rooted vector: {:?}", sqrt_vec) ;
-    }
+//     let vec_with_sqrt: Vec<f32> = v.into_iter().map(|x| x.sqrt()).collect() ;
+//     let sqrt_vec = &vec_with_sqrt[2..7] ;
+//     println!("Square rooted vector: {:?}", sqrt_vec) ;
+// }
+
+//------------------------------------------------------------------------------------------
+
+// Q3. Write a Rust program that creates an array of strings with size 6 and initializes it with days of the week.
+// Remove the last 2 elements from the array and slice it to get a sub-array containing the first 3 days.
+// Print the resulting sub-array.
+
+fn main() {
+    let mut week_days = vec!["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] ;
+    let n = week_days.len() ;
+    println!("Weekdays: {:?}", week_days) ;
+    week_days.drain(n-2..) ;
+    println!("Removing last 2 days from weekdays: {:?}", week_days) ;
+
+    let first_three_days = &week_days[0..3] ;
+    println!("First 3 days of week: {:?}", first_three_days) ;
+}
